@@ -20,7 +20,7 @@ export const NavigationProvider = ({ children }) => {
 
       setLoading(true);
       const res = await fetchData(src, dest);
-      console.log(res);
+      // console.log(res);
       setNavigationData(res.data);
       // Handle the data or update state as needed
 

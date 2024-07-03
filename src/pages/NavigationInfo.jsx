@@ -3,7 +3,7 @@ import { NavigationContext } from "../context/NavigationContext";
 import { Link } from "react-router-dom";
 
 const NavigationInfo = () => {
-  const { navigationData, src, dest, setSrc, setDest, handleSearch } =
+  const { navigationData, src, dest, setSrc, setDest, handleSearch, loading } =
     useContext(NavigationContext);
   console.log(navigationData);
 
@@ -47,23 +47,33 @@ const NavigationInfo = () => {
                 />
               </div>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-              {/* Distance, Time, and View Direction boxes */}
-              <div className="p-4 border border-gray-300 rounded bg-secondary text-black">
-                <h2 className="font-bold">Distance</h2>
-                <p>{navigationData.best_routes[0].distance_label}</p>
-              </div>
-              <div className="p-4 border border-gray-300 rounded bg-secondary text-black">
-                <h2 className="font-bold">Time</h2>
-                <p>{navigationData.best_routes[0].duration_label}</p>
-              </div>
-              <div className="p-4 border border-gray-300 rounded bg-secondary text-black">
-                <h2 className="font-bold">View Direction</h2>
-                <p>
-                  <Link to={navigationData.directions_link}>Click here</Link>
-                </p>
-              </div>
-            </div>
+            {loading ? (
+                <div className="flex space-x-3 space-y-4 justify-center items-start mb-4">
+                  <span className="sr-only items-start">Loading...</span>
+                  <div className="h-6 w-6 bg-black rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                  <div className="h-6 w-6 bg-black rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                  <div className="h-6 w-6 bg-black rounded-full animate-bounce"></div>
+                </div>
+              ) : (      
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+                  {/* Distance, Time, and View Direction boxes */}
+                  <div className="p-4 border border-gray-300 rounded bg-secondary text-black">
+                    <h2 className="font-bold">Distance</h2>
+                    <p>{navigationData.best_routes[0].distance_label}</p>
+                  </div>
+                  <div className="p-4 border border-gray-300 rounded bg-secondary text-black">
+                    <h2 className="font-bold">Time</h2>
+                    <p>{navigationData.best_routes[0].duration_label}</p>
+                  </div>
+                  <div className="p-4 border border-gray-300 rounded bg-secondary text-black">
+                    <h2 className="font-bold">View Direction</h2>
+                    <p>
+                      <Link to={navigationData.directions_link}>Click here</Link>
+                    </p>
+                  </div>
+                </div>
+              )}
+
             <h2 className="text-xl font-bold mb-4 text-primary">Best Routes</h2>
             <div className="grid grid-cols-1 gap-4">
               {/* Route boxes with dropdown details */}
