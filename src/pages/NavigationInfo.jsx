@@ -13,7 +13,7 @@ const NavigationInfo = () => {
     }
   };
   return (
-    <div className="text-center">
+    <div className="text-start">
       {navigationData ? (
         <div className="p-4 bg-background min-h-screen">
           <div className="container mx-auto">
@@ -84,7 +84,7 @@ const NavigationInfo = () => {
                     <summary className="cursor-pointer text-[#219c90]">
                       Details
                     </summary>
-                    <p>Name: NH-34</p>
+                    <p>Name: {route.route_name}</p>
                     <p>Distance: {route.distance_label}</p>
                     <p>Time: {route.duration_label}</p>
                     <>
